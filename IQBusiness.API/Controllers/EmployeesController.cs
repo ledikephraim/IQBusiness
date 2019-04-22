@@ -32,14 +32,14 @@
     /// <summary>
     /// Retrieves a single employee.
     /// </summary>
-    /// <param name="key">the employee identifier.</param>
+    /// <param name="id">the employee identifier.</param>
     /// <returns></returns>
-    public SingleResult<Employee> Get(int key)
+    public Employee Get(int id)
     {
       //return from db.
-      var employee = dbQuery().Where(x => x.Id == key);
+      var employee = dbQuery().Where(x => x.Id == id);
 
-      return SingleResult.Create(employee);
+      return employee.FirstOrDefault();
     }
 
     /// <summary>
@@ -95,7 +95,8 @@
       employee.Telephone = model.Telephone;
       employee.SocialMediaAddress = model.SocialMediaAddress;
 
-
+      dbContext.Entry(employee).CurrentValues.SetValues(employee);
+      dbContext.SaveChanges();
       return Ok(model);
     }
 
