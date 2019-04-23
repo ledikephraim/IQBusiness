@@ -55,6 +55,16 @@
         return Conflict();
       }
 
+      //validate model
+      if (string.IsNullOrEmpty(model.FirstName))
+      {
+        return BadRequest("invalid first name value supplied.");
+      }
+      if (string.IsNullOrEmpty(model.LastName))
+      {
+        return BadRequest("invalid last name value supplied.");
+      }
+
       //persist.
       var employee = new IQBusiness.Persistence.Employee
       {
@@ -85,6 +95,16 @@
       if (employee == null)
       {
         return NotFound();
+      }
+
+      //validate model
+      if (string.IsNullOrEmpty(model.FirstName))
+      {
+        return BadRequest("invalid first name value supplied.");
+      }
+      if (string.IsNullOrEmpty(model.LastName))
+      {
+        return BadRequest("invalid last name value supplied.");
       }
 
       //Update row

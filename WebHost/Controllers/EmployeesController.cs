@@ -1,55 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using WebHost.Models;
-
-namespace WebHost.Controllers
+﻿namespace WebHost.Controllers
 {
+  using System.Collections.Generic;
+  using System.Net.Http;
+  using System.Threading.Tasks;
+  using System.Web.Mvc;
+  using WebHost.Models;
+  using WebHost.Properties;
+
   public class EmployeeController : Controller
   {
-    // GET: Employee
     public async Task<ActionResult> Index()
     {
       HttpResponseMessage response = null;
       using (var client = new HttpClient())
       {
-        response = await client.GetAsync("http://localhost:9000/api/employees");
+        response = await client.GetAsync($"{Settings.Default.APIBaseURI}/Employees");
       }
 
       var result = await response.Content.ReadAsAsync<List<Employee>>();
       return View(result);
     }
 
-    // GET: Employee/Details/5
-    public ActionResult Details(int id)
+    public async Task<ActionResult> Details(int id)
     {
       HttpResponseMessage response = null;
       using (var client = new HttpClient())
       {
-        response =client.GetAsync($"http://localhost:9000/api/employees/{id}").Result;
-        
+        response = await client.GetAsync($"{Settings.Default.APIBaseURI}/Employees/{id}");
       }
-      var model = response.Content.ReadAsAsync<Employee>().Result;
-        return View(model);
+      var model =  await response.Content.ReadAsAsync<Employee>();
+
+      return View(model);
     }
 
-    // GET: Employee/Create
     public ActionResult Create()
     {
       return View();
     }
 
-    // POST: Employee/Create
     [HttpPost]
     public async Task<ActionResult> Create(FormCollection collection)
     {
       try
       {
-        // TODO: Add insert logic here
         var firstName = collection["FirstName"];
         var lastName = collection["lastName"];
         var address = collection["Address"];
@@ -67,7 +60,8 @@ namespace WebHost.Controllers
         };
         using (var httpClient = new HttpClient())
         {
-          var result = await httpClient.PostAsJsonAsync("http://localhost:9000/api/Employees", employee);
+          
+          var result = await httpClient.PostAsJsonAsync($"{Settings.Default.APIBaseURI}/Employees", employee);
         }
 
         return RedirectToAction("Index");
@@ -85,20 +79,17 @@ namespace WebHost.Controllers
       HttpResponseMessage response = null;
       using (var client = new HttpClient())
       {
-        response = await client.GetAsync($"http://localhost:9000/api/Employees/{id}");
+        response = await client.GetAsync($"{Settings.Default.APIBaseURI}/Employees/{id}");
       }
       var model = await response.Content.ReadAsAsync<Employee>();
       return View(model);
     }
 
-    // POST: Employee/Edit/5
     [HttpPost]
     public ActionResult Edit(int id, FormCollection collection)
     {
       try
       {
-        // TODO: Add update logic here
-        // TODO: Add insert logic here
         var firstName = collection["FirstName"];
         var lastName = collection["lastName"];
         var address = collection["Address"];
@@ -118,7 +109,7 @@ namespace WebHost.Controllers
         };
         using (var httpClient = new HttpClient())
         {
-          var result = httpClient.PutAsJsonAsync("http://localhost:9000/api/Employees", employee).Result;
+          var result = httpClient.PutAsJsonAsync($"{Settings.Default.APIBaseURI}/Employees", employee).Result;
         }
 
         return RedirectToAction("Index");
@@ -129,13 +120,11 @@ namespace WebHost.Controllers
       }
     }
 
-    // GET: Employee/Delete/5
     public ActionResult Delete(int id)
     {
       return View();
     }
 
-    // POST: Employee/Delete/5
     [HttpPost]
     public ActionResult Delete(int id, FormCollection collection)
     {

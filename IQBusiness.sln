@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQBusiness.Persistence", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQBusiness.WebHost", "WebHost\IQBusiness.WebHost.csproj", "{6FA58FE9-F547-4AC8-BC6B-7514BCF7DD29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQBusiness.Tests", "IQBusiness.Tests\IQBusiness.Tests.csproj", "{89F2DD9B-73A5-4302-9BE4-E282725E447C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6FA58FE9-F547-4AC8-BC6B-7514BCF7DD29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FA58FE9-F547-4AC8-BC6B-7514BCF7DD29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FA58FE9-F547-4AC8-BC6B-7514BCF7DD29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89F2DD9B-73A5-4302-9BE4-E282725E447C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F2DD9B-73A5-4302-9BE4-E282725E447C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F2DD9B-73A5-4302-9BE4-E282725E447C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F2DD9B-73A5-4302-9BE4-E282725E447C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
