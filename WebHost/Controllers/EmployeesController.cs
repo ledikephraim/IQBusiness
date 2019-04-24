@@ -28,7 +28,7 @@
       {
         response = await client.GetAsync($"{Settings.Default.APIBaseURI}/Employees/{id}");
       }
-      var model =  await response.Content.ReadAsAsync<Employee>();
+      var model = await response.Content.ReadAsAsync<Employee>();
 
       return View(model);
     }
@@ -41,6 +41,25 @@
     [HttpPost]
     public async Task<ActionResult> Create(FormCollection collection)
     {
+
+      if (!ModelState.IsValid)
+      {
+
+        var vm = new Error();
+
+        vm.Message = new ErrorMessage
+
+        {
+
+          Error = "Registration failed",
+
+          ErrorDescription = "Fields missing"
+
+        };
+
+        return View();
+    
+      }
       try
       {
         var firstName = collection["FirstName"];
@@ -60,7 +79,7 @@
         };
         using (var httpClient = new HttpClient())
         {
-          
+
           var result = await httpClient.PostAsJsonAsync($"{Settings.Default.APIBaseURI}/Employees", employee);
         }
 
@@ -138,6 +157,21 @@
       {
         return View();
       }
+    }
+    [HttpPost]
+    public async Task<ActionResult> employeeSearch(string search, string button)
+    {
+
+      // TODO: Add delete logic here
+      HttpResponseMessage response = null;
+      using (var httpClient = new HttpClient())
+      {
+        response = await httpClient.GetAsync($"{Settings.Default.APIBaseURI}/Employees/Search?={search}");
+      }
+      var result = await response.Content.ReadAsAsync<List<Employee>>();
+      return View("Index", result);
+
+
     }
   }
 }

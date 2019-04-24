@@ -4148,6 +4148,7 @@ input[type="button"].btn-block {
   position: relative;
   display: -ms-flexbox;
   display: flex;
+  flex-basis:100%;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   -ms-flex-align: center;
@@ -4155,6 +4156,7 @@ input[type="button"].btn-block {
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  background-color: black;
 }
 
 .navbar > .container,
@@ -4203,10 +4205,15 @@ input[type="button"].btn-block {
   float: none;
 }
 
+.container-otis {
+    margin: 120px;
+    max-width: 1140px;
+}
+
 .navbar-text {
-  display: inline-block;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+    display: inline-block;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .navbar-collapse {
@@ -4241,9 +4248,18 @@ input[type="button"].btn-block {
   background-size: 100% 100%;
 }
 
+.navbar-header{
+  display:flex;
+  flex: 1 1;
+  flex-flow:row;
+  margin: 0 140px 0 1210px;
+  float: right;
+  /*text-align:right;*/
+  padding: 10px;
+}
+
 @media (max-width: 575.98px) {
-  .navbar-expand-sm > .container,
-  .navbar-expand-sm > .container-fluid {
+    .navbar-expand-sm > .container, .navbar-expand-sm > .container-fluid {
     padding-right: 0;
     padding-left: 0;
   }

@@ -2,6 +2,7 @@
 {
   using System;
   using System.Collections.Generic;
+  using System.ComponentModel.DataAnnotations;
   using System.Linq;
   using System.Web;
 
@@ -21,11 +22,13 @@
     /// <summary>
     /// Gets or sets the first name of an employee.
     /// </summary>
+    [Required]
     public string FirstName { get; set; }
 
     /// <summary>
     /// Gets or sets the last name of an employee.
     /// </summary>
+    [Required]
     public string LastName { get; set; }
 
     /// <summary>
@@ -36,6 +39,7 @@
     /// <summary>
     /// Gets or sets an email address of an employee.
     /// </summary>
+    [EmailAddress]
     public string Email { get; set; }
 
     /// <summary>

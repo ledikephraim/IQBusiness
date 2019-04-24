@@ -140,6 +140,10 @@
       dbContext.SaveChanges();
       return Ok();
     }
+    public IQueryable<Employee> Search(string key)
+    {
+      return dbQuery().Where(x => x.FirstName.Contains(key));
+    }
     private IQueryable<Employee> dbQuery()
     {
       var employees = dbContext.Employees;
@@ -156,6 +160,7 @@
                    };
       return result;
     }
+    
   }
 }
 
