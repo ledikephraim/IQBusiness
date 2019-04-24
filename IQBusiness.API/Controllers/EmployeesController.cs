@@ -49,6 +49,14 @@
     /// <returns></returns>
     public IHttpActionResult Post(Employee model)
     {
+      if(!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+      if(model ==null)
+      {
+        return BadRequest("null model value supplied.");
+      }
       // map employee to db type.
       if (dbQuery().Any(x => x.Id == model.Id))
       {
@@ -89,6 +97,14 @@
     /// <returns></returns>
     public IHttpActionResult Put(Employee model)
     {
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+      if (model == null)
+      {
+        return BadRequest("null model value supplied.");
+      }
       //check row existence
       var employee = dbContext.Employees.FirstOrDefault(x => x.Id == model.Id);
       //return not found if not found.
